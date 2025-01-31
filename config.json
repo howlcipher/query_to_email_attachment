@@ -1,0 +1,52 @@
+{
+  "database": {
+    "server": "your_database_server",
+    "database": "your_database_name",
+    "login": {
+      "username": "your_username",
+      "password": "your_password"
+    }
+  },
+  "csv_directory": "output_files",
+  "csv_filename": "RDNCases.xlsx",
+  "log_file": {
+    "directory": "logs",
+    "filename_prefix": "db_log"
+  },
+  "queries": [
+    {
+      "sheet_name": "All Rows",
+      "query": "SELECT [ID], [CaseNumber], [AccountNumber], [VIN], [VendorID], [CurrentStatus], [CurrentStatusUpdateTS], [PostedToRDNTS], [PostedToRDNStatus], [ErrorMessage] FROM [YourDatabase].[dbo].[RDNCases] WHERE CAST(CurrentStatusUpdateTS AS DATE) = CAST(GETDATE() AS DATE);"
+    },
+    {
+      "sheet_name": "Successes",
+      "query": "SELECT [ID], [CaseNumber], [AccountNumber], [VIN], [VendorID], [CurrentStatus], [CurrentStatusUpdateTS], [PostedToRDNTS], [PostedToRDNStatus], [ErrorMessage] FROM [YourDatabase].[dbo].[RDNCases] WHERE PostedToRDNStatus = 'True' AND CAST(CurrentStatusUpdateTS AS DATE) = CAST(GETDATE() AS DATE);"
+    },
+    {
+      "sheet_name": "Failures",
+      "query": "SELECT [ID], [CaseNumber], [AccountNumber], [VIN], [VendorID], [CurrentStatus], [CurrentStatusUpdateTS], [PostedToRDNTS], [PostedToRDNStatus], [ErrorMessage] FROM [YourDatabase].[dbo].[RDNCases] WHERE PostedToRDNStatus = 'False' AND CAST(CurrentStatusUpdateTS AS DATE) = CAST(GETDATE() AS DATE);"
+    }
+  ],
+  "email": {
+    "smtp_server": "your_smtp_server",
+    "smtp_port": 25,
+    "smtp_timeout": "200000",
+    "sender_email": "no-reply@example.com",
+    "sender_password": "your_email_password_or_empty_for_no_auth",
+    "recipient_email": [
+      "recipient1@example.com",
+      "recipient2@example.com"
+    ],
+    "subject": "Today's RDN Cases Database Query Results",
+    "body": "Please find the attached query results, of today's total cases, successes, and failures.",
+    "empty_attachment_body": "Zero cases for today.",
+    "attachment": true,
+    "attachment_source": "",
+    "smtp_auth_required": true
+  },
+  "cleanup": {
+    "enabled": true,
+    "directory": "output_files",
+    "days_old": 30
+  }
+}

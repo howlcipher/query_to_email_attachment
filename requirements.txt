@@ -1,0 +1,8 @@
+sqlalchemy
+pandas
+xlsxwriter
+pyodbc
+xlrd
+openpyxl
+pyyaml
+pyinstaller
