@@ -52,7 +52,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=r'images\first_investors_financial_services_logo_IJY_icon.ico',
+    icon=r'images\icon.ico',
 )
 
 coll = COLLECT(
